@@ -1,12 +1,18 @@
-# My Cursor work-style kit
+# Pstack adoption review and initial Cursor kit
 
 Use `/automate-me` to turn selected conversations into your own working
 preferences. Use `work-mode` to apply those preferences in everyday work.
 The builder is adapted from pstack; this is a small independent kit, not the
 full pstack plugin. No plugin installation or model configuration is required.
 
-**Read [the ranked review](docs/AUTOMATE_ME_REVIEW.md)** for the useful parts,
-weak parts, exact changes, and verification limits.
+**Start with [the whole-pstack adoption review](docs/PSTACK_ADOPTION_REVIEW.md).**
+It ranks all 25 ordinary skills, 24 principles, 23 playbooks, worker definitions,
+helpers and optional integrations, and recommends what to keep or adapt.
+
+This repository currently ships three initial personal/adoption skills. It is
+not yet a dependency-complete fork of the recommended pstack workflows. The
+review distinguishes those recommendations from installed capabilities.
+The [automate-me review](docs/AUTOMATE_ME_REVIEW.md) is a narrower appendix.
 
 ## What is included
 

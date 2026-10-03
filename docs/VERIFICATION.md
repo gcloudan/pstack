@@ -5,6 +5,17 @@ Cursor account. The original pstack files were not modified.
 
 ## Behavior check
 
+The scope was subsequently expanded to the whole pstack. Three independent
+source audits cover ordinary engineering/principles, reviews/verification, and
+coordination/adoption. The main adoption document checks the complete source
+inventory: 49 public skills, 23 playbooks, two agents and the separate dormant
+Benny pack. These are source assessments, not 49 executed skill trials.
+
+A Node probe ran the actual upstream plan checker against the source template.
+With the model filled, its ten lanes passed despite unexecuted boxes and no
+screenshots. Removing lane 10 failed. This establishes structural enforcement
+and its evidence limits; it does not run a live app or validate a PR.
+
 A separate agent applied the builder to three invented excerpts and the
 existing starter mode. It proposed a short comparison table preference and a
 concise status preference, preserved uncontradicted starter rules, kept a
