@@ -353,7 +353,9 @@ deletion and author-specific prose/model presets.
 Your target repository is `gcloudan/pstack`. The current bundle holds the
 **initial three-skill personal kit plus these reviews**, not all 49 upstream
 skills. It cannot supply the selected workflows merely because this document
-mentions them. Publication is still blocked by missing GitHub authentication.
+mentions them. The repository is now published at
+[gcloudan/pstack](https://github.com/gcloudan/pstack); SSH access and the pushed
+commit were checked on 3 October 2026.
 
 For the full system, there are two legitimate paths:
 

@@ -29,15 +29,15 @@ The [automate-me review](docs/AUTOMATE_ME_REVIEW.md) is a narrower appendix.
 
 ## Clone on the work computer
 
-The selected hosting destination is `gcloudan/pstack`. Once the prepared commit
-is pushed, clone it on the work computer:
+The prepared repository is published at
+[gcloudan/pstack](https://github.com/gcloudan/pstack). Clone it on the work computer:
 
 ```sh
 git clone https://github.com/gcloudan/pstack.git cursor-work-style
 cd cursor-work-style
 ```
 
-The delivery report records whether publication succeeded. A Git bundle is also
+The delivery report records the successful publication. A Git bundle is also
 prepared as a self-contained cloneable copy. If remote access is unavailable,
 copy `cursor-work-style.bundle` through your permitted file-transfer route,
 then clone it:
@@ -55,7 +55,7 @@ Set-Location "$HOME/cursor-work-style"
 ```
 
 Offline clones have a file-path origin. For later updates, obtain another bundle
-and fetch it, or set origin to a hosted remote once one exists. A bundle does not
+and fetch it, or set origin to the hosted repository. A bundle does not
 provide a sync service. If hosting is preferred, push this prepared repository
 to the selected work-accessible repository, then use its URL instead. Cloning
 upstream pstack would not include this adaptation.
@@ -69,8 +69,8 @@ git push -u origin main
 ```
 
 No force push is required. If the remote has acquired other work, reconcile it
-before pushing rather than overwriting it. Publication from the preparation
-machine was attempted but blocked by missing valid GitHub credentials.
+before pushing rather than overwriting it. The initial authentication blocker
+was resolved with a dedicated SSH key; publication succeeded on 3 October 2026.
 
 ## Install once
 

@@ -164,7 +164,7 @@ The evidence review and small scope are intended to prevent those failures.
 
 ## Your work-computer plan
 
-The selected destination is `gcloudan/pstack`. Once published, clone that
+The published destination is `gcloudan/pstack`. Clone that
 repository rather than the original `cursor/plugins` repository. It contains
 the adaptation, both installers, this review and the licensing notice. An
 offline Git bundle is also prepared so cloning is possible without hosting.

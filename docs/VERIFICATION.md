@@ -84,10 +84,13 @@ of the actual execution environment.
   transfer artifact contains this repository, not the surrounding audit folder.
 - Selected hosted destination: `https://github.com/gcloudan/pstack`. Anonymous
   remote read succeeded and showed an empty repository at preparation time.
-- Publication is **blocked by authentication**. HTTPS had no available login;
-  SSH could not authenticate with the available key. The host key was checked
+- Initial publication was blocked by authentication. A dedicated Ed25519 key
+  was subsequently generated outside the repository and added to GitHub by
+  the user. SSH access succeeded and `main` was pushed on 3 October 2026.
+  The remote head matched local commit
+  `0e3205eff8f7ea71d32f1a329e6dc2978700bb4f` before this status update.
+  The host key was checked
   against [GitHub's published fingerprint](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
   in a temporary file; no user SSH configuration was replaced.
-- The prepared clone can be pushed from an authenticated machine using the
-  README commands. The empty hosted repository alone cannot supply these files
-  until that push succeeds.
+- The hosted repository now supplies the prepared files. The private key and
+  local SSH configuration are not tracked or included in the Git bundle.
