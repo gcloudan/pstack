@@ -110,12 +110,11 @@ work, then keep employer-specific evidence and preferences on that machine.
 | Activation | Generated mode intended for explicit invocation | Builder explicit only; mode available normally, with separate User Rule or project activation |
 | Sharing | Personal skill produced in a chosen location | Cloneable Git kit; raw histories and analysis state excluded from default distribution |
 
-The kit deliberately does not include `/setup-pstack`, its role-to-model map,
-the ten review lanes or all pstack workflow skills. Those are separate choices,
-not requirements for personal preference mining. You can install full pstack
-later and revise the routing section to name the workflows actually present.
-This kit already provides a working personal-mode layer without claiming those
-additional capabilities exist.
+The active profile does not enable `/setup-pstack`, its role-to-model map or
+the ten review lanes. The complete source is now preserved under upstream/pstack,
+with selected investigation/delegation adaptations active in the core profile.
+Those other workflows remain separate adoption decisions. See
+[the integration record](HARNESS_INTEGRATION.md) for current scope.
 
 ## Why the author probably chose these mechanisms
 
@@ -170,7 +169,8 @@ the adaptation, both installers, this review and the licensing notice. An
 offline Git bundle is also prepared so cloning is possible without hosting.
 Use the [README](../README.md) for exact commands.
 
-Install the three skill folders once into `~/.cursor/skills`. Cursor documents
+Use the installer to copy the complete current profile and supporting resources
+into `~/.cursor/skills` and `~/.cursor/agents`. Cursor documents
 that user location and separate User Rules; add
 [the provided rule text](cursor-user-rule.txt) in the settings UI to request
 work-mode in new chats across your projects. Alternatively merge

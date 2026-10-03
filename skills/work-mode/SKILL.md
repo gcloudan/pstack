@@ -23,7 +23,9 @@ request determine scope, capabilities and authorization.
   prior receipts and untested live behavior. Do not claim that a green checklist,
   compilation or worker agreement proves every user path.
 
-For repository onboarding/current-state questions, use
+For the adopted engineering routes, use
+[pstack-router](../pstack-router/SKILL.md) while preserving the project's existing
+harness. For repository onboarding/current-state questions, use
 [repo-onboarding](../repo-onboarding/SKILL.md) when its scope matches. For bugs,
 features or reviews, use the project's available workflow and verification
 instructions rather than force an investigation or an unavailable pstack tool.

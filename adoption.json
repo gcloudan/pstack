@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "upstream_snapshot": "upstream/snapshot.json",
+  "active_profile": "profiles/core.skills",
+  "active_agents": "profiles/core.agents",
+  "stage": "first investigation/delegation integration",
+  "target_harness": {
+    "status": "awaiting-location",
+    "note": "Work harness path/URL has not been supplied. No work-machine installation is claimed."
+  },
+  "next_candidates": [
+    "blast-radius",
+    "create-verification-skill",
+    "maintain-verification-skill",
+    "tdd",
+    "architect"
+  ],
+  "features": [
+    {
+      "id": "architect",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/architect/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "arena",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/arena/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "automate-me",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/automate-me/SKILL.md",
+      "status": "adapted",
+      "adapted_skills": [
+        "automate-me"
+      ],
+      "decision": "Selected sources, explicit/inferred preferences and private coverage state."
+    },
+    {
+      "id": "benchmark-checklist",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/benchmark-checklist/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "blast-radius",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/blast-radius/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "bro",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/bro/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "create-verification-skill",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/create-verification-skill/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "figure-it-out",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/figure-it-out/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "how",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/how/SKILL.md",
+      "status": "adapted",
+      "adapted_skills": [
+        "pstack-how"
+      ],
+      "decision": "Adaptive independent questions; direct small-task path; parent checks sources."
+    },
+    {
+      "id": "interrogate",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/interrogate/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "maintain-verification-skill",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/maintain-verification-skill/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "make-bot-ui",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/make-bot-ui/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "no-comments",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/no-comments/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "poteto-mode",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/poteto-mode/SKILL.md",
+      "status": "partially-adapted",
+      "adapted_skills": [
+        "pstack-router"
+      ],
+      "decision": "Only the investigation/delegation routes are integrated; other playbooks remain preserved."
+    },
+    {
+      "id": "principle-attack-the-premise",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-attack-the-premise/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-boundary-discipline",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-boundary-discipline/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-build-the-lever",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-build-the-lever/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-encode-lessons-in-structure",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-encode-lessons-in-structure/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-exhaust-the-design-space",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-exhaust-the-design-space/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-experience-first",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-experience-first/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-explain-the-number",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-explain-the-number/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-fix-root-causes",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-fix-root-causes/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-foundational-thinking",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-foundational-thinking/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-guard-the-context-window",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-guard-the-context-window/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-laziness-protocol",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-laziness-protocol/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-make-operations-idempotent",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-make-operations-idempotent/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-migrate-callers-then-delete-legacy-apis",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-migrate-callers-then-delete-legacy-apis/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-minimize-reader-load",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-minimize-reader-load/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-model-the-domain",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-model-the-domain/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-never-block-on-the-human",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-never-block-on-the-human/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-outcome-oriented-execution",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-outcome-oriented-execution/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-prove-it-works",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-prove-it-works/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-redesign-from-first-principles",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-redesign-from-first-principles/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-separate-before-serializing-shared-state",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-separate-before-serializing-shared-state/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-sequence-verifiable-units",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-sequence-verifiable-units/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-subtract-before-you-add",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-subtract-before-you-add/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-test-behavior-not-implementation",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-test-behavior-not-implementation/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "principle-type-system-discipline",
+      "kind": "principle",
+      "source": "upstream/pstack/skills/principle-type-system-discipline/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "recall",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/recall/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "reflect",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/reflect/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "setup-pstack",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/setup-pstack/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "show-me-your-work",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/show-me-your-work/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "swarm",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/swarm/SKILL.md",
+      "status": "adapted",
+      "adapted_skills": [
+        "pstack-swarm"
+      ],
+      "decision": "Available runtime, scoped briefs, separate coverage/count/concurrency, honest gaps."
+    },
+    {
+      "id": "tdd",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/tdd/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "teach",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/teach/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "technical-writing",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/technical-writing/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "typescript-best-practices",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/typescript-best-practices/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "unslop",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/unslop/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "why",
+      "kind": "skill",
+      "source": "upstream/pstack/skills/why/SKILL.md",
+      "status": "preserved",
+      "adapted_skills": [],
+      "decision": "Review and integrate against the actual harness when relevant."
+    },
+    {
+      "id": "playbook:authoring-a-skill",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/authoring-a-skill.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:autonomous-run",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/autonomous-run.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:autopilot-full",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/autopilot-full.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:autopilot-stack",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/autopilot-stack.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:babysit",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/babysit.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:bug-fix",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/bug-fix.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:eval",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/eval.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:feature",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/feature.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:hillclimb",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/hillclimb.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:investigation",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/investigation.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:multi-phase-plan",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/multi-phase-plan.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:opening-a-pr",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/opening-a-pr.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:orchestrate",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/orchestrate.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:pause-safely",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/pause-safely.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:perf-issue",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/perf-issue.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:prototype",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/prototype.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:refactoring",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/refactoring.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:runtime-forensics",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/runtime-forensics.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:session-pickup",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/session-pickup.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:shipping",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/shipping.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:trace-forensics",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/trace-forensics.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:visual-parity",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/visual-parity.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "playbook:worktree-cleanup",
+      "kind": "playbook",
+      "source": "upstream/pstack/skills/poteto-mode/playbooks/worktree-cleanup.md",
+      "status": "preserved",
+      "decision": "Original available; not activated by the first integration batch."
+    },
+    {
+      "id": "agent:comment-sicko",
+      "kind": "agent",
+      "source": "upstream/pstack/agents/comment-sicko.md",
+      "status": "preserved",
+      "decision": "Do not load author defaults into adapted workers implicitly."
+    },
+    {
+      "id": "agent:poteto-agent",
+      "kind": "agent",
+      "source": "upstream/pstack/agents/poteto-agent.md",
+      "status": "preserved",
+      "decision": "Do not load author defaults into adapted workers implicitly."
+    },
+    {
+      "id": "benny:reproduce-and-fix-issues",
+      "kind": "automation",
+      "source": "upstream/pstack/automations/benny/skills/reproduce-and-fix-issues/SKILL.md",
+      "status": "preserved",
+      "decision": "Dormant integration; actual connectors, project and delivery scope required."
+    },
+    {
+      "id": "benny:setup-benny",
+      "kind": "automation",
+      "source": "upstream/pstack/automations/benny/skills/setup-benny/SKILL.md",
+      "status": "preserved",
+      "decision": "Dormant integration; actual connectors, project and delivery scope required."
+    },
+    {
+      "id": "benny:triage-issue-reports",
+      "kind": "automation",
+      "source": "upstream/pstack/automations/benny/skills/triage-issue-reports/SKILL.md",
+      "status": "preserved",
+      "decision": "Dormant integration; actual connectors, project and delivery scope required."
+    }
+  ],
+  "verification": {
+    "source": "160 raw Git blobs restored and independently compared to pinned commit",
+    "core": "Seven adapted skills and one worker; supporting resource and profile checks",
+    "trials": [
+      "Source walkthrough: reachable entry point and documentation disagreement, existing Node checks passed",
+      "Existing project recipe: selected ahead of added walkthrough; existing checks passed",
+      "PowerShell and POSIX shell: resources, conflict preservation, exact backups, unrelated files retained"
+    ],
+    "work_cursor": "Not observed: actual work harness location is pending",
+    "swarm": "Parent used scoped independent source/dependency audit; broader operational coverage not yet trialled in Cursor"
+  }
+}

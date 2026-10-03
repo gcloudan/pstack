@@ -1,174 +1,101 @@
-# Pstack adoption review and initial Cursor kit
+# Your pstack harness
 
-Use `/automate-me` to turn selected conversations into your own working
-preferences. Use `work-mode` to apply those preferences in everyday work.
-The builder is adapted from pstack; this is a small independent kit, not the
-full pstack plugin. No plugin installation or model configuration is required.
+The complete pstack v0.15.6 source is preserved in `upstream/pstack` at commit
+`23e4138daa01c42d4969f7a5465f82704e64f798`. The working layer under `skills/`
+adapts selected mechanisms to fit your existing Cursor harness.
 
-**Start with [the whole-pstack adoption review](docs/PSTACK_ADOPTION_REVIEW.md).**
-It ranks all 25 ordinary skills, 24 principles, 23 playbooks, worker definitions,
-helpers and optional integrations, and recommends what to keep or adapt.
+Start with [the feature rankings](docs/PSTACK_ADOPTION_REVIEW.md) and
+[the integration record](docs/HARNESS_INTEGRATION.md). `adoption.json` tracks
+77 source features: 49 public skills/principles, 23 playbooks, two agents and
+three separate Benny automation skills. Preserved source is not automatically enabled.
 
-This repository currently ships three initial personal/adoption skills. It is
-not yet a dependency-complete fork of the recommended pstack workflows. The
-review distinguishes those recommendations from installed capabilities.
-The [automate-me review](docs/AUTOMATE_ME_REVIEW.md) is a narrower appendix.
+## First integration batch
 
-## What is included
-
-| File | Purpose |
+| Component | What it does |
 |---|---|
-| `skills/automate-me/SKILL.md` | Explicitly invoked builder; reads selected evidence and drafts/updates your mode |
-| `skills/work-mode/SKILL.md` | Small starter personal mode; based only on the present conversation |
-| `skills/repo-onboarding/SKILL.md` | Optional workflow for repository status questions |
-| `docs/cursor-user-rule.txt` | Text to activate the mode across new Cursor Agent chats |
-| `docs/WORKSPACE-AGENTS.section.md` | Alternative activation snippet for selected repositories |
-| `docs/history-selection.example.md` | Template for selecting work and exported chat evidence |
-| `docs/preference-seed.md` | Why each starter preference is present |
-| `scripts/install.ps1` / `scripts/install.sh` | Copy the three skills; preserve differing installed files by default |
+| `pstack-router` | Uses an existing compatible project recipe first; routes supported investigation tasks |
+| `pstack-how` | Traces reachable implementation, checks documentation against code, reports evidence and gaps |
+| `pstack-swarm` | Assigns independent responsibilities when useful; distinguishes complete coverage from a first-success race |
+| `pstack-investigator` agent | Shares the investigation contract with a scoped read-only worker |
+| `pstack-adopt` | Compares and integrates the next upstream feature against the actual harness |
+| `repo-onboarding` | Establishes current repository behavior and verification status |
+| `work-mode` / `automate-me` | Starter preferences and a builder using selected accessible history |
 
-## Clone on the work computer
+This batch does not port every engineering workflow or choose models for you.
+The source remains available for the next feature-by-feature integration.
 
-The prepared repository is published at
-[gcloudan/pstack](https://github.com/gcloudan/pstack). Clone it on the work computer:
-
-```sh
-git clone https://github.com/gcloudan/pstack.git cursor-work-style
-cd cursor-work-style
-```
-
-The delivery report records the successful publication. A Git bundle is also
-prepared as a self-contained cloneable copy. If remote access is unavailable,
-copy `cursor-work-style.bundle` through your permitted file-transfer route,
-then clone it:
+## Clone on your work computer
 
 ```sh
-git clone /path/to/cursor-work-style.bundle cursor-work-style
-cd cursor-work-style
+git clone https://github.com/gcloudan/pstack.git
+cd pstack
 ```
 
-On Windows, an example after copying the bundle to Downloads is:
+For an existing clone, use `git pull --ff-only`. An offline bundle can also be
+cloned with `git clone /path/to/cursor-work-style.bundle pstack`.
+
+## Preview and install
+
+For a specific existing project on Windows:
 
 ```powershell
-git clone "$HOME/Downloads/cursor-work-style.bundle" "$HOME/cursor-work-style"
-Set-Location "$HOME/cursor-work-style"
+./scripts/install.ps1 -WorkspaceRoot 'C:/path/to/project' -DryRun
+./scripts/install.ps1 -WorkspaceRoot 'C:/path/to/project'
 ```
 
-Offline clones have a file-path origin. For later updates, obtain another bundle
-and fetch it, or set origin to the hosted repository. A bundle does not
-provide a sync service. If hosting is preferred, push this prepared repository
-to the selected work-accessible repository, then use its URL instead. Cloning
-upstream pstack would not include this adaptation.
-
-If you clone the bundle on a machine with an authenticated GitHub connection,
-publish this prepared repository with:
+On macOS/Linux:
 
 ```sh
-git remote set-url origin https://github.com/gcloudan/pstack.git
-git push -u origin main
+sh scripts/install.sh --workspace-root /path/to/project --dry-run
+sh scripts/install.sh --workspace-root /path/to/project
 ```
 
-No force push is required. If the remote has acquired other work, reconcile it
-before pushing rather than overwriting it. The initial authentication blocker
-was resolved with a dedicated SSH key; publication succeeded on 3 October 2026.
+Without a workspace argument, either installer installs the core into
+`~/.cursor/skills` and `~/.cursor/agents`. For cross-project activation, add
+[the User Rule text](docs/cursor-user-rule.txt) in Cursor's Rules settings.
+The installer does not edit that UI setting. A workspace installation also
+adds the namespaced `.cursor/rules/pstack-harness.mdc` rule.
 
-## Install once
+Installers copy the complete seven-skill profile, supporting resources and one
+agent. They preserve differing existing packages by default and exit 2 to flag
+comparison. Other packages may still be installed; this is not an atomic transaction.
+After comparing changes, `-ReplaceExisting` or `--replace-existing` backs up
+overwritten files under a sibling `pstack-harness-backups` directory. Extra
+files and unrelated skills, rules and agents remain in place.
 
-Windows PowerShell:
+For a scratch install, use `-SkillsRoot ./scratch/skills` or
+`--skills-root ./scratch/skills`. The agent root must be the adjacent `agents`
+directory because its shared contract uses relative paths. Manual installation
+must copy every folder listed in `profiles/core.skills`, plus the agent listed
+in `profiles/core.agents`; copying only SKILL.md files loses resources.
 
-```powershell
-./scripts/install.ps1
-```
+Open a fresh Cursor chat and ask it to read `/pstack-router`, describe the
+available routes and investigate a small subsystem. Local files do not prove
+discovery or availability in remote/cloud environments.
 
-macOS/Linux shell:
+## Keep adopting features
 
-```sh
-sh scripts/install.sh
-```
+In the harness clone, invoke `/pstack-adopt` with the feature and target project,
+for example: “Compare upstream blast-radius with this project's existing
+change-planning workflow. Add only the missing useful behavior and verify it.”
 
-If execution policy blocks a local PowerShell script, copy the three skill
-directories under `skills/` into `$HOME/.cursor/skills/` yourself. No execution
-policy change or extra runtime is needed for manual installation. The result is
-`~/.cursor/skills/automate-me/SKILL.md`, `work-mode/SKILL.md`, and
-`repo-onboarding/SKILL.md`. Keep all three, because their relative links depend
-on this arrangement. Open a fresh Cursor Agent chat to check discovery.
+The process is compare → adapt → exercise → record → install. Launch commands,
+test gates, product constraints and delivery policy stay in each workspace.
+The next candidates are change impact, reusable verification recipes, then
+test-driven implementation and architecture planning where needed.
 
-The scripts accept a custom root for a trial:
+Use `/automate-me` later with selected accessible conversation exports. Cloning
+does not import prior chats. The current mode is a conversation-based seed;
+no full-history profile has been generated. Keep raw history and private state
+outside shared commits.
 
-```powershell
-./scripts/install.ps1 -SkillsRoot ./scratch/skills
-```
+## Checks and provenance
 
-```sh
-sh scripts/install.sh --skills-root ./scratch/skills
-```
+`python scripts/validate.py` checks the snapshot, inventory and active dependencies.
+`--installed-root /path/to/project/.cursor` also compares installed resources.
+Python is optional for installation. [Verification](docs/VERIFICATION.md)
+records the actual trials and remaining work-side checks.
 
-## Activate across projects
-
-Cursor documents user-level skills in `~/.cursor/skills` and a separate global
-User Rules setting. In **Cursor Settings → Rules** (the Customize → Rules area
-in current documentation), add the text from `docs/cursor-user-rule.txt` as a
-User Rule. This is a one-time manual setting; the installer does not edit an
-undocumented settings store. See [Cursor skills](https://cursor.com/docs/skills)
-and [Cursor rules](https://cursor.com/docs/rules).
-
-For a quick explicit trial, invoke `/work-mode` in a chat. For session use, the
-skills documentation describes selecting a skill as a Custom Mode with
-Alt+Enter on Windows. Availability alone does not mean every task uses it.
-The User Rule requests the persistent behavior; verify it in a fresh chat.
-
-If you prefer selected repositories, merge `docs/WORKSPACE-AGENTS.section.md`
-into each project's existing root `AGENTS.md` instead of using a User Rule.
-Do not overwrite the project's existing instructions. For remote/cloud agents,
-local files need a supported sync or repository installation; a file on your
-laptop cannot be assumed present in another execution environment.
-
-Ask a fresh work chat: “Read my work-mode and tell me its four preferences,
-then apply them to this task.” Confirm it can find the installed file. The
-current request and project instructions still determine scope and permissions.
-
-## Make it yours with selected history
-
-1. Review the starter preferences. They are a seed, not a full history profile.
-2. Make a source selection using `docs/history-selection.example.md`.
-3. Place permitted exports in a local private directory, or supply the active
-   Cursor workspace's transcript location. Select multiple projects explicitly
-   if you want preferences from across them. Prior ChatGPT/Codex chats need an
-   accessible export or another authorized source; cloning cannot import them.
-4. Invoke `/automate-me` with those source paths and your existing work-mode.
-5. Review the actual draft and evidence, then accept/edit the changes.
-
-Keep raw histories and the analysis watermark outside the shared repository.
-`history/`, `private/` and `state/` are ignored for a local experiment, but Git
-ignore is not a scrubber for previously tracked files. Commit only the concise
-mode you intend to share. Work-specific preferences can stay on the work
-machine; this repository need not receive them.
-
-## Updates without losing your mode
-
-An ordinary install preserves a differing installed skill and returns exit 2
-to signal that comparison is needed. It is safe to rerun unchanged installs.
-Before replacing files, compare the installed mode with the source and copy
-your accepted personalized mode back into `skills/work-mode/SKILL.md` if it
-belongs in this repository. Then install the reviewed version explicitly:
-
-```powershell
-./scripts/install.ps1 -ReplaceExisting
-```
-
-```sh
-sh scripts/install.sh --replace-existing
-```
-
-These flags affect all three kit files that differ. They back up the previous
-files in a sibling `work-style-backups` directory before copying. They do not
-delete other skills or edit User Rules. The mode retains a stable `work-mode`
-name, so its activation text need not change on each refresh.
-
-## Limits
-
-This delivery prepares and checks the portable files; it cannot verify your
-work Cursor configuration from this machine. History mining happens only when
-you invoke the builder with accessible selected sources. The scripts do not
-install upstream pstack, choose models or supply subagent tools. A shorter rule
-can improve consistency, but no productivity gain has been measured.
+The original MIT license is retained. This repository supplies instructions and
+resources; Cursor supplies model access, execution and subagent capabilities.
+See [origin notice](NOTICE.md).

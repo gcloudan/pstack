@@ -9,8 +9,8 @@ expensive review, experimentation and overnight machinery situational.**
 
 My earlier delivery concentrated on personal preference mining. That was too
 narrow. `/automate-me` is one way to personalize the system below; it is not
-the system you are deciding whether to adopt. The existing three-skill kit is
-an initial personal layer. It does not contain the full pstack base.
+the system you are deciding whether to adopt. The repository now preserves the complete upstream source and ships a first
+investigation/delegation integration. See HARNESS_INTEGRATION.md for active scope.
 
 These ratings are engineering judgments for your expressed preferences:
 concrete trials, explanations of mechanisms, useful agents without fixed counts
@@ -350,10 +350,10 @@ deletion and author-specific prose/model presets.
 
 ## How adoption and cloning should actually work
 
-Your target repository is `gcloudan/pstack`. The current bundle holds the
-**initial three-skill personal kit plus these reviews**, not all 49 upstream
-skills. It cannot supply the selected workflows merely because this document
-mentions them. The repository is now published at
+Your target repository is `gcloudan/pstack`. It now holds the complete pinned
+upstream package plus the adapted seven-skill core, worker and these reviews.
+Only profile-listed adaptations are installed; ratings are not activation.
+The repository is published at
 [gcloudan/pstack](https://github.com/gcloudan/pstack); SSH access and the pushed
 commit were checked on 3 October 2026.
 
@@ -407,6 +407,6 @@ The score is about useful mechanisms and stock assumptions. It is not a claim
 that all 49 skills were executed or that multi-model work improves every task.
 The previous trials exercised selected onboarding/fix behavior, not the entire
 library. No work-machine Cursor configuration, employer integrations, live
-PR fleet or full upstream Bun test suite was verified here. The next concrete
-implementation is a dependency-complete core fork based on these selections;
-the initial personal kit should not be mistaken for that completed base.
+PR fleet or full upstream Bun test suite was verified here. The first dependency-complete investigation/delegation batch is now prepared
+and exercised. Most rated workflows remain preserved for later integration;
+see [the integration record](HARNESS_INTEGRATION.md).
