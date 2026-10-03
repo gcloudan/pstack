@@ -34,10 +34,19 @@ and documentation links are checked locally.
 
 The PowerShell installer was exercised in a temporary workspace directory,
 not the user's global Cursor skills. First install copied all three files;
-an unchanged rerun reported all three current. Differing-copy preservation,
-explicit replacement and backup checks are recorded in the final delivery
-status below. The shell version has equivalent copying behavior, but runtime
-validation is pending availability of a usable local POSIX shell.
+an unchanged rerun reported all three current. A changed synthetic mode
+was preserved with exit 2. Explicit replacement restored the kit copy and the
+backup matched the complete pre-replacement file hash.
+
+The shell installer passed syntax, fresh install, unchanged rerun, changed-mode
+preservation, explicit replacement and exact-backup checks under the bundled
+Git POSIX shell and utilities on Windows. It was not run on a separate Linux or
+macOS computer. The first local attempt lacked those utilities on PATH; the
+test environment was corrected before the successful run.
+
+PowerShell installation was also run from the bundle clone. `.gitattributes`
+keeps shell scripts and portable skill documents using LF line endings across
+checkouts. All test destinations stayed inside the audit workspace.
 
 ## Pending work-side checks
 
@@ -53,5 +62,21 @@ of the actual execution environment.
 
 ## Final delivery status
 
-Repository publication, clone/bundle verification and the remaining installer
-checks will be recorded here before the delivery is finalized.
+- Dedicated local Git repository on `main`, with the three skills, installers,
+  documents, MIT license and origin notice committed.
+- Offline Git bundle created with complete history, verified by `git bundle
+  verify`, and successfully cloned into a separate test directory.
+- Frontmatter, retained skill references, documentation links and installer
+  output checked. The final mode clarification keeps delegation conditional
+  on authorization and usefulness; it does not introduce another preference.
+- No raw real transcripts or private evidence state in the tracked kit. The
+  transfer artifact contains this repository, not the surrounding audit folder.
+- Selected hosted destination: `https://github.com/gcloudan/pstack`. Anonymous
+  remote read succeeded and showed an empty repository at preparation time.
+- Publication is **blocked by authentication**. HTTPS had no available login;
+  SSH could not authenticate with the available key. The host key was checked
+  against [GitHub's published fingerprint](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints)
+  in a temporary file; no user SSH configuration was replaced.
+- The prepared clone can be pushed from an authenticated machine using the
+  README commands. The empty hosted repository alone cannot supply these files
+  until that push succeeds.

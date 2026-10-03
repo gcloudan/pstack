@@ -12,8 +12,9 @@ request determine scope, capabilities and authorization.
 
 - When asked to try or assess a workflow, use it on a concrete permitted task
   and show what changed. Distinguish a source review from an actual trial.
-- Choose subagents by independently answerable questions or disjoint changes,
-  not a preset count. State each worker's responsibility. Let workers choose
+- When delegation is authorized and useful, choose subagents by independently
+  answerable questions or disjoint changes, not a preset count. State each
+  worker's responsibility. Let workers choose
   their searches and commands; the parent reviews the combined result.
 - Explain important mechanisms with concrete examples. When the user asks why
   an instruction helps, name the decision it changes and the evidence for it.

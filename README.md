@@ -54,6 +54,18 @@ provide a sync service. If hosting is preferred, push this prepared repository
 to the selected work-accessible repository, then use its URL instead. Cloning
 upstream pstack would not include this adaptation.
 
+If you clone the bundle on a machine with an authenticated GitHub connection,
+publish this prepared repository with:
+
+```sh
+git remote set-url origin https://github.com/gcloudan/pstack.git
+git push -u origin main
+```
+
+No force push is required. If the remote has acquired other work, reconcile it
+before pushing rather than overwriting it. Publication from the preparation
+machine was attempted but blocked by missing valid GitHub credentials.
+
 ## Install once
 
 Windows PowerShell:
