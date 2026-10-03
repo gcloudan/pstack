@@ -60,6 +60,11 @@ before writing. The supported layout uses adjacent `skills` and `agents` roots.
 The portable installed-file check compares all selected supporting resources;
 it also compares the project rule when present. It cannot check discovery.
 
+The complete Git bundle was verified and cloned into a separate directory.
+Snapshot/dependency checks passed from that fresh clone. Its PowerShell
+installer then populated a fresh project destination, and all installed skills,
+resources, worker and project rule matched the clone.
+
 ## Remaining work-side checks
 
 - Locate and compare the actual existing work harness.
