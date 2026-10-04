@@ -36,7 +36,7 @@ html = '''<!doctype html>
 <script>
 const d=JSON.parse(document.getElementById('data').textContent);
 const installed=new Set(d.receipt.installed_skills||[]);
-const hermesMap={how:'pstack-how',swarm:'pstack-swarm'};
+const hermesMap={how:'pstack-how',swarm:'pstack-swarm','blast-radius':'pstack-impact'};
 function el(tag,text,cls){const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n}
 const cards=[['Source files',d.source_count],['Recorded features',d.adoption.features.length],['Hermes skills installed',installed.size],['Live model trial',d.receipt.live_model_task_observed?'Observed':'Unobserved']];
 for(const [label,value] of cards){const c=el('div','','card');c.append(el('div',String(value),'number'),el('div',label,'label'));document.getElementById('cards').append(c)}

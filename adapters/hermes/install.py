@@ -44,5 +44,9 @@ receipt_path = source / 'installation.local.json'
 if receipt_path.exists():
     previous = json.loads(receipt_path.read_text())
     receipt['before_count'] = previous.get('before_count', receipt['before_count'])
+    # Overall observation means some installed method was exercised, not every new addition.
+    for key in ('live_model_task_observed', 'walkthrough_verified', 'delegation_verified', 'impact_verified'):
+        if key in previous:
+            receipt[key] = previous[key]
 receipt_path.write_text(json.dumps(receipt, indent=2) + '\n')
 print(json.dumps(receipt))

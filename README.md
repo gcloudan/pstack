@@ -105,3 +105,8 @@ See [origin notice](NOTICE.md).
 [Hermes setup and browser access](docs/HERMES.md) describes three native
 adaptations, installation through Hermes's own manager and a read-only adoption
 board served through SSH. This side experiment is separate from work Cursor.
+
+The [live coordinator](docs/COORDINATOR.md) adds localhost:9999, native worker
+lifecycle receipts, session/task metadata, scoped real-model trials and the
+fourth native method, `pstack-impact`. Use `/pstack-investigate` for the native
+walkthrough/delegation bundle.

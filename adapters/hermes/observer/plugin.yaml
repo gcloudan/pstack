@@ -1,0 +1,7 @@
+name: pstack-coordinator
+version: 0.1.0
+description: Metadata-only worker lifecycle receipts for the local coordinator
+kind: standalone
+provides_hooks:
+  - subagent_start
+  - subagent_stop

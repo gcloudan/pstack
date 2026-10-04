@@ -3,7 +3,7 @@
 Hermes executes the work on its own machine. Your laptop can remain the viewer
 and SSH client. A graphical desktop on Hermes is unnecessary for these methods.
 
-The side experiment installs three native skills under the existing
+The initial side experiment installed three native skills under the existing
 `software-development` category: `pstack-how`, `pstack-swarm` and `pstack-adopt`.
 The original planning, debugging, TDD and other skills remain. The native catalog
 provides discovery; the Cursor router and named Cursor investigator are not
@@ -45,8 +45,9 @@ another layout needs that path adapted before use.
 The actual first install grew the catalog from 89 to 92 names and retained every
 existing name. All three skills passed native creation and load checks. Metadata
 warnings were corrected through native edits, and an unchanged rerun passed.
-These are installation and loader checks. A live model task and real delegation
-run have not yet been observed. The board shows that distinction.
+Those initial checks were installation and loading only. Live walkthrough,
+two-child delegation and impact trials have now been exercised; see
+[the coordinator record](COORDINATOR.md) for current evidence and limits.
 
 ## View the board from your laptop
 

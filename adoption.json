@@ -56,7 +56,13 @@
       "source": "upstream/pstack/skills/blast-radius/SKILL.md",
       "status": "preserved",
       "adapted_skills": [],
-      "decision": "Review and integrate against the actual harness when relevant."
+      "decision": "Review and integrate against the actual harness when relevant.",
+      "runtime_adaptations": {
+        "hermes": {
+          "skill": "pstack-impact",
+          "decision": "Native tools and catalog; task-proportionate evidence; no author model/worker-count defaults"
+        }
+      }
     },
     {
       "id": "bro",
@@ -90,7 +96,13 @@
       "adapted_skills": [
         "pstack-how"
       ],
-      "decision": "Adaptive independent questions; direct small-task path; parent checks sources."
+      "decision": "Adaptive independent questions; direct small-task path; parent checks sources.",
+      "runtime_adaptations": {
+        "hermes": {
+          "skill": "pstack-how",
+          "decision": "Native tools and catalog; task-proportionate evidence; no author model/worker-count defaults"
+        }
+      }
     },
     {
       "id": "interrogate",
@@ -366,7 +378,13 @@
       "adapted_skills": [
         "pstack-swarm"
       ],
-      "decision": "Available runtime, scoped briefs, separate coverage/count/concurrency, honest gaps."
+      "decision": "Available runtime, scoped briefs, separate coverage/count/concurrency, honest gaps.",
+      "runtime_adaptations": {
+        "hermes": {
+          "skill": "pstack-swarm",
+          "decision": "Native tools and catalog; task-proportionate evidence; no author model/worker-count defaults"
+        }
+      }
     },
     {
       "id": "tdd",
@@ -623,5 +641,28 @@
     ],
     "work_cursor": "Not observed: actual work harness location is pending",
     "swarm": "Parent used scoped independent source/dependency audit; broader operational coverage not yet trialled in Cursor"
+  },
+  "runtime_profiles": {
+    "cursor": {
+      "profile": "profiles/core.skills",
+      "work_installation": "awaiting-target"
+    },
+    "hermes": {
+      "skills_directory": "adapters/hermes/skills",
+      "observer": "adapters/hermes/observer",
+      "coordinator": "coordinator",
+      "native_methods": [
+        "pstack-how",
+        "pstack-swarm",
+        "pstack-impact",
+        "pstack-adopt"
+      ],
+      "existing_workflows": "Planning, debugging, TDD and reviews retained; no duplicate router",
+      "trials": {
+        "how": "Live CLI walkthrough, source and tests independently checked",
+        "swarm": "Two native delegate_task children, parent evidence and start/stop hooks checked",
+        "blast-radius": "Live hypothetical-change assessment; unchanged fixture tests only"
+      }
+    }
   }
 }
