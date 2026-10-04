@@ -15,6 +15,19 @@ server = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(server)
 
 class CoordinatorTests(unittest.TestCase):
+    def test_work_summary_identifies_decisions_and_board_scoped_dependencies(self):
+        tasks = [{'board': 'life', 'id': 'p', 'status': 'ready', 'assignee': None},
+                 {'board': 'life', 'id': 'c', 'status': 'todo'},
+                 {'board': 'life', 'id': 'b', 'status': 'blocked'},
+                 {'board': 'other', 'id': 'p', 'status': 'done'},
+                 {'board': 'other', 'id': 'c', 'status': 'todo'},
+                 {'board': 'life', 'id': 'old', 'status': 'archived'}]
+        links = [{'board': name, 'parent_id': 'p', 'child_id': 'c'} for name in ('life', 'other')]
+        result = server.work_summary(tasks, links)
+        self.assertEqual(result['needs_attention'], 2)
+        self.assertEqual(result['waiting_on_dependencies'], 1)
+        self.assertEqual(result['counts']['running'], 0)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.home = Path(self.temp.name)

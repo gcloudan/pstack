@@ -171,7 +171,31 @@ sign-in. No VPN account, public tunnel, router port forward or publicly reachabl
 admin endpoint has been created. Hindsight on localhost:8888 is an internal API,
 not an additional coordinator website.
 
-Eight behavioral tests cover read-only snapshots, named-board discovery,
+Nine behavioral tests cover read-only snapshots, named-board discovery,
 private-column omission, stale ownership, ordering, and network Host/origin/
 launch-token boundaries. Login and the actual network pages were checked in
 this computer's browser. Individual phone routing has not been tested.
+
+
+## Practical overview on port 9999
+
+The landing page is now a work overview, not the fixture experiment queue.
+It derives decisions from actual task metadata: ready tasks without an owner,
+blocked tasks, review requests and todo tasks with unfinished prerequisites.
+Dependencies are matched within their board, and archived tasks are excluded.
+Missing task data is labelled unavailable instead of producing a reassuring zero.
+The current inspected board has one ready unassigned task, one blocked task and
+four dependent todo tasks; no tasks are marked running.
+
+Next-action links go to the native dashboard on 9119. No assignment, dispatcher
+nudge, model call or task mutation happens simply by opening this page.
+Task descriptions and private messages stay in the authenticated native UI.
+Service health uses `systemctl --user is-active` for the existing gateway,
+native dashboard and memory service, cached for 15 seconds. Service availability
+is distinct from active AI work.
+
+The parent/worker view groups observed stop receipts by parent session and shows
+actual result status and duration. It presents completed work as history;
+these receipts are not a live agent census. Technical records and small method
+experiments remain available as secondary views. Example prompts explain how
+to use the installed methods in native Hermes chat.

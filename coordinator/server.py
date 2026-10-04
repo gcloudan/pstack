@@ -23,6 +23,37 @@ TRIALS = {'walkthrough': 'pstack-how', 'delegation': 'pstack-how,pstack-swarm', 
 LOCK = threading.RLock()
 TOKEN = secrets.token_urlsafe(32)
 PROCESSES = {}
+HEALTH = {'at': 0, 'services': []}
+
+def service_health():
+    if time.monotonic() - HEALTH['at'] > 15:
+        names = ['hermes-gateway.service', 'pstack-hermes-dashboard.service', 'hindsight.service']
+        try:
+            result = subprocess.run(['systemctl', '--user', 'is-active', *names],
+                                    capture_output=True, text=True, timeout=2)
+            states = result.stdout.splitlines()
+            HEALTH['services'] = [{'name': name, 'state': states[i] if i < len(states) else 'unknown'}
+                                  for i, name in enumerate(names)]
+        except (OSError, subprocess.TimeoutExpired):
+            HEALTH['services'] = [{'name': name, 'state': 'unknown'} for name in names]
+        HEALTH['at'] = time.monotonic()
+    return HEALTH['services']
+
+def work_summary(tasks, links):
+    visible = [task for task in tasks if task.get('status') != 'archived']
+    counts = {status: sum(task.get('status') == status for task in visible)
+              for status in ('running', 'ready', 'blocked', 'review', 'todo', 'done', 'triage', 'scheduled')}
+    unassigned = sum(task.get('status') == 'ready' and not task.get('assignee') for task in visible)
+    index = {(task.get('board'), task.get('id')): task for task in tasks}
+    waiting = set()
+    for edge in links:
+        parent = index.get((edge.get('board'), edge.get('parent_id')))
+        child = index.get((edge.get('board'), edge.get('child_id')))
+        if parent and child and parent.get('status') != 'done' and child.get('status') == 'todo':
+            waiting.add((edge.get('board'), edge.get('child_id')))
+    return {'counts': counts, 'ready_without_owner': unassigned,
+            'waiting_on_dependencies': len(waiting),
+            'needs_attention': unassigned + counts['blocked'] + counts['review']}
 
 def now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -252,6 +283,7 @@ def snapshot():
     return {'observed_at': now(), 'sessions': sessions, 'delegations': delegations, 'tasks': tasks,
             'links': links, 'task_runs': runs, 'boards': boards, 'leases': leases(), 'worker_events': events,
             'jobs': jobs(), 'receipt': read_json(ROOT / 'adapters/hermes/installation.local.json', {}),
+            'work': work_summary(tasks, links), 'services': service_health(),
             'errors': {'sessions': session_error, 'delegations': delegation_error,
                        'tasks': task_error, 'observer': observer_note},
             'limits': ['Read-only selected metadata; no transcript bodies or credentials.',
