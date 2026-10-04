@@ -1,4 +1,4 @@
-# Hermes coordinator on localhost:9999
+# Hermes browser interfaces and coordinator
 
 This side experiment improves Hermes's harness and makes its work visible from
 a laptop. It is separate from installing the Cursor kit on a work computer.
@@ -10,7 +10,8 @@ The coordinator reads selected metadata from Hermes's default profile:
 - Recent session records, with source, parent relationship, timing and counters.
   An open record does not establish an active model turn.
 - Native Kanban tasks, attempt states and prerequisite links, without dispatching
-  or changing that board. The inspected board is empty.
+  or changing those boards. Both the default and named boards are inspected.
+  The default board is empty; the active named `life-ops` board contains existing tasks.
 - Metadata-only start/stop receipts from an additive worker observer.
 - Coordinator-owned disposable trials, including running/process-completed
   states, observed tool names and final evidence.
@@ -24,8 +25,25 @@ view. Events from earlier sessions cannot be reconstructed as live telemetry.
 
 ## Open it
 
-The backend on Hermes listens only on `127.0.0.1:9999`. Open this tunnel on your
-laptop and keep it running:
+On the home network, open [Sites & access](http://192.168.8.174:9999/#access).
+It lists the live coordinator, native Hermes dashboard, browser editor and
+original adoption view. Phones and other computers on that network use the same
+IP links; `localhost` always refers to the device opening it.
+
+The deployed coordinator binds `0.0.0.0:9999` and accepts the explicitly declared
+LAN Host `192.168.8.174:9999`. Network viewers cannot obtain a trial-launch token
+or launch model calls. Launch requires a loopback peer, loopback Host, matching
+Origin and the process token. The standalone server still defaults to loopback.
+Do not forward these LAN ports to the public internet.
+
+The native dashboard runs separately on port 9119 through Hermes's own password
+auth provider. Its unauthenticated config API returns 401. The username is
+`hermes`; the generated login is stored only on Hermes at
+`~/.hermes/runtime/pstack-dashboard-login.txt` (0600), never in this repository.
+The service's hash/signing secret are private in `pstack-dashboard.env`.
+The existing browser editor is already available on port 8080.
+
+For the localhost control view, open this tunnel on your laptop and keep it running:
 
 ```sh
 ssh -N -L 127.0.0.1:9999:127.0.0.1:9999 hermes@192.168.8.174
@@ -65,7 +83,7 @@ task stays in the parent; independent slices get scoped briefs. The parent
 checks evidence rather than treating agreement as proof. `pstack-impact` traces
 downstream effects and tests the facts on which a safety conclusion depends.
 
-The trial buttons make real model calls using your configured Hermes provider.
+The trial buttons on the localhost control connection make real model calls using your configured Hermes provider.
 They accept only predefined prompts against the disposable reminder fixture.
 One trial owns that shared fixture at a time. Native command approvals remain
 active. No yolo mode or built-in tool override permission is granted.
@@ -130,3 +148,30 @@ Host receipts, trial outputs and observer logs stay local and out of shared
 commits. Worker start records with lazy/unassigned session IDs may not join their
 stop records; the view labels that missing correlation rather than inventing it.
 The observer rotates its metadata log at 8 MiB. Evidence remains after a trial.
+
+
+## Network setup and limits
+
+`scripts/enable-hermes-network.py` is a deployment helper for this specific
+Hermes host, not a generic work-Cursor installer. It adds the LAN viewer and
+`pstack-hermes-dashboard.service`, leaving the existing gateway and editor
+processes in place. Both authored user services are enabled. Its access directory
+is private deployment state under `state/coordinator/access.local.json`.
+
+The native dashboard includes `/chat`, `/sessions`, `/skills`, `/models`,
+`/plugins`, `/profiles`, `/cron` and its existing `/kanban` plugin. The native
+Kanban supports dispatch/assignment actions; this experiment has not nudged its
+dispatcher or changed existing tasks. Its chat shows workers belonging to that
+chat session; the custom observer supplies lifecycle receipts from fresh
+plugin-enabled sessions across the default profile.
+
+A localhost tunnel and a LAN link do not grant access from arbitrary networks.
+Away-from-home access still needs a private VPN such as Tailscale and owner
+sign-in. No VPN account, public tunnel, router port forward or publicly reachable
+admin endpoint has been created. Hindsight on localhost:8888 is an internal API,
+not an additional coordinator website.
+
+Eight behavioral tests cover read-only snapshots, named-board discovery,
+private-column omission, stale ownership, ordering, and network Host/origin/
+launch-token boundaries. Login and the actual network pages were checked in
+this computer's browser. Individual phone routing has not been tested.

@@ -216,6 +216,28 @@ def launch(kind):
         threading.Thread(target=finish, daemon=True).start()
         return job
 
+def board_metadata():
+    paths = [('default', HOME / 'kanban.db')]
+    directory = HOME / 'kanban/boards'
+    if directory.is_dir():
+        for child in sorted(directory.iterdir()):
+            if child.is_dir() and not child.is_symlink() and child.name.replace('-', '').replace('_', '').isalnum():
+                paths.append((child.name, child / 'kanban.db'))
+    tasks, links, runs, boards = [], [], [], []
+    for name, path in paths[:30]:
+        rows, error = records(path, 'tasks', [
+            'id', 'assignee', 'status', 'priority', 'started_at', 'completed_at',
+            'last_heartbeat_at', 'session_id', 'current_run_id'], order='created_at', limit=200)
+        edges, _ = records(path, 'task_links', ['parent_id', 'child_id'], limit=200)
+        attempts, _ = records(path, 'task_runs', [
+            'id', 'task_id', 'profile', 'status', 'started_at', 'ended_at', 'last_heartbeat_at', 'outcome'],
+            order='started_at')
+        tasks.extend(dict(row, board=name) for row in rows)
+        links.extend(dict(row, board=name) for row in edges)
+        runs.extend(dict(row, board=name) for row in attempts)
+        boards.append({'board': name, 'records': len(rows), 'error': error})
+    return tasks, links, runs, boards
+
 def snapshot():
     sessions, session_error = records(HOME / 'state.db', 'sessions', [
         'id', 'source', 'parent_session_id', 'started_at', 'ended_at',
@@ -224,16 +246,11 @@ def snapshot():
     delegations, delegation_error = records(HOME / 'state.db', 'async_delegations', [
         'delegation_id', 'parent_session_id', 'state', 'dispatched_at', 'completed_at', 'updated_at', 'owner_pid'],
         order='updated_at')
-    tasks, task_error = records(HOME / 'kanban.db', 'tasks', [
-        'id', 'assignee', 'status', 'priority', 'started_at', 'completed_at',
-        'last_heartbeat_at', 'session_id', 'current_run_id'], order='created_at')
-    links, _ = records(HOME / 'kanban.db', 'task_links', ['parent_id', 'child_id'], limit=200)
-    runs, _ = records(HOME / 'kanban.db', 'task_runs', [
-        'id', 'task_id', 'profile', 'status', 'started_at', 'ended_at', 'last_heartbeat_at', 'outcome'],
-        order='started_at')
+    tasks, links, runs, boards = board_metadata()
+    task_error = '; '.join(f"{b['board']}: {b['error']}" for b in boards if b['error']) or None
     events, observer_note = observer_events()
     return {'observed_at': now(), 'sessions': sessions, 'delegations': delegations, 'tasks': tasks,
-            'links': links, 'task_runs': runs, 'leases': leases(), 'worker_events': events,
+            'links': links, 'task_runs': runs, 'boards': boards, 'leases': leases(), 'worker_events': events,
             'jobs': jobs(), 'receipt': read_json(ROOT / 'adapters/hermes/installation.local.json', {}),
             'errors': {'sessions': session_error, 'delegations': delegation_error,
                        'tasks': task_error, 'observer': observer_note},
@@ -245,7 +262,12 @@ def snapshot():
 class Handler(BaseHTTPRequestHandler):
     def allowed_host(self):
         return self.headers.get('Host') in (f'localhost:{self.server.server_port}',
-                                           f'127.0.0.1:{self.server.server_port}')
+                                           f'127.0.0.1:{self.server.server_port}',
+                                           *getattr(self.server, 'extra_hosts', ()))
+
+    def local_control(self):
+        return self.client_address[0] in ('127.0.0.1', '::1') and self.headers.get('Host') in (
+            f'localhost:{self.server.server_port}', f'127.0.0.1:{self.server.server_port}')
 
     def send(self, status, content, kind='application/json'):
         data = content.encode() if isinstance(content, str) else json.dumps(content).encode()
@@ -259,7 +281,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         if not self.allowed_host():
-            return self.send(403, {'error': 'Loopback host required'})
+            return self.send(403, {'error': 'Configured host required'})
         path = urlparse(self.path).path
         if path == '/':
             return self.send(200, (ROOT / 'coordinator/index.html').read_text(), 'text/html')
@@ -267,7 +289,10 @@ class Handler(BaseHTTPRequestHandler):
             with LOCK:
                 return self.send(200, snapshot())
         if path == '/api/bootstrap':
-            return self.send(200, {'token': TOKEN, 'trials': list(TRIALS)})
+            return self.send(200, {'token': TOKEN if self.local_control() else None,
+                                   'can_launch': self.local_control(), 'trials': list(TRIALS)})
+        if path == '/api/access':
+            return self.send(200, read_json(ROOT / 'state/coordinator/access.local.json', {'sites': []}))
         if path == '/api/adoption':
             return self.send(200, {'adoption': read_json(ROOT / 'adoption.json', {}),
                                    'receipt': read_json(ROOT / 'adapters/hermes/installation.local.json', {})})
@@ -275,7 +300,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         expected_origin = 'http://' + self.headers.get('Host', '')
-        if (not self.allowed_host() or self.headers.get('Origin') != expected_origin
+        if (not self.local_control() or self.headers.get('Origin') != expected_origin
                 or not secrets.compare_digest(self.headers.get('X-Coordinator-Token', ''), TOKEN)):
             return self.send(403, {'error': 'Same-origin coordinator token required'})
         path = urlparse(self.path).path
@@ -293,7 +318,10 @@ class Handler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, default=9999)
+    parser.add_argument('--bind', default='127.0.0.1')
+    parser.add_argument('--allow-host', action='append', default=[], help='Additional exact host:port for read-only viewers')
     args = parser.parse_args()
-    server = ThreadingHTTPServer(('127.0.0.1', args.port), Handler)
-    print(f'Coordinator listening on http://127.0.0.1:{args.port}', flush=True)
+    server = ThreadingHTTPServer((args.bind, args.port), Handler)
+    server.extra_hosts = tuple(args.allow_host)
+    print(f'Coordinator listening on http://{args.bind}:{args.port}', flush=True)
     server.serve_forever()

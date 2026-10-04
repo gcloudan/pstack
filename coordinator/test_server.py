@@ -56,6 +56,19 @@ class CoordinatorTests(unittest.TestCase):
         self.assertEqual(rows, [])
         self.assertIsNotNone(error)
 
+    def test_named_boards_are_visible_even_when_default_is_empty(self):
+        for board, task in [('default', None), ('life-ops', 'existing-task')]:
+            path = self.home / ('kanban.db' if board == 'default' else 'kanban/boards/life-ops/kanban.db')
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with closing(sqlite3.connect(path)) as con:
+                con.execute('CREATE TABLE tasks(id TEXT,status TEXT,title TEXT)')
+                if task:
+                    con.execute('INSERT INTO tasks VALUES(?,?,?)', (task, 'ready', 'PRIVATE_TITLE'))
+                con.commit()
+        result = server.snapshot()
+        self.assertEqual(result['tasks'], [{'id': 'existing-task', 'status': 'ready', 'board': 'life-ops'}])
+        self.assertNotIn('PRIVATE_TITLE', json.dumps(result))
+
     def test_open_record_does_not_become_running_job(self):
         server.STATE.mkdir()
         job = {'id': 'prior-owner', 'status': 'running', 'kind': 'walkthrough'}
@@ -101,6 +114,15 @@ class CoordinatorTests(unittest.TestCase):
                 headers={'Origin': 'http://foreign.example', 'X-Coordinator-Token': server.TOKEN}), 403)
             rejected(urllib.request.Request(base + '/api/trials/arbitrary-command', data=b'',
                 headers={'Origin': base, 'X-Coordinator-Token': server.TOKEN}), 409)
+            http.extra_hosts = (f'192.168.8.174:{http.server_port}',)
+            lan_host = http.extra_hosts[0]
+            bootstrap = json.load(urllib.request.urlopen(urllib.request.Request(base + '/api/bootstrap',
+                headers={'Host': lan_host})))
+            self.assertFalse(bootstrap['can_launch'])
+            self.assertIsNone(bootstrap['token'])
+            rejected(urllib.request.Request(base + '/api/trials/walkthrough', data=b'',
+                headers={'Host': lan_host, 'Origin': 'http://' + lan_host,
+                         'X-Coordinator-Token': server.TOKEN}), 403)
             self.assertFalse(server.STATE.exists())
         finally:
             http.shutdown()
