@@ -99,3 +99,9 @@ records the actual trials and remaining work-side checks.
 The original MIT license is retained. This repository supplies instructions and
 resources; Cursor supplies model access, execution and subagent capabilities.
 See [origin notice](NOTICE.md).
+
+## Separate Hermes experiment
+
+[Hermes setup and browser access](docs/HERMES.md) describes three native
+adaptations, installation through Hermes's own manager and a read-only adoption
+board served through SSH. This side experiment is separate from work Cursor.

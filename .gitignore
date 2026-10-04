@@ -5,3 +5,6 @@ state/
 *.local.json
 .DS_Store
 __pycache__/
+board/
+*.local.log
+*.local.pid
